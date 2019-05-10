@@ -9,17 +9,6 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
-class App extends Component {
-  render(): React.ReactElement<any> {
-    return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>Welcome to React Native!</Text>
-        <Text style={styles.instructions}>To get started, edit App.js</Text>
-      </View>
-    );
-  }
-}
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -38,5 +27,16 @@ const styles = StyleSheet.create({
     marginBottom: 5,
   },
 });
+
+class App extends Component {
+  public render(): React.ReactElement {
+    return (
+      <View style={styles.container}>
+        <Text style={styles.welcome}>Welcome to React Native!</Text>
+        <Text style={styles.instructions}>To get started, edit App.js</Text>
+      </View>
+    );
+  }
+}
 
 export default App;
