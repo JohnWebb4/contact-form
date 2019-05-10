@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { Alert, Button, ScrollView, Text, View } from 'react-native';
 import { Formik, FormikProps } from 'formik';
+import * as Yup from 'yup';
 
 import styles from './styles/styles';
 import FormText from './components/FormText';
@@ -9,14 +10,23 @@ interface Values {
   email: string;
 }
 
+const contactFormSchema = Yup.object().shape({
+  email: Yup.string()
+    .email('Invalid email')
+    .required('Required'),
+});
+
+const initialValues: Values = {
+  email: '',
+};
+
 function displayResults(values: Values): void {
   Alert.alert('Results', JSON.stringify(values));
 }
 
 function renderForm(props: FormikProps<Values>): React.ReactElement {
   return (
-    <ScrollView>
-      <Text style={styles.title}>Add a contact</Text>
+    <Fragment>
       <FormText
         title={'Email'}
         value={props.values.email}
@@ -24,28 +34,31 @@ function renderForm(props: FormikProps<Values>): React.ReactElement {
         onChangeText={props.handleChange('email')}
       />
       <Text style={styles.description}>To get started, edit App.js</Text>
-    </ScrollView>
+    </Fragment>
   );
 }
 
-const initialValues = {
-  email: '',
-};
-
 function App(): React.ReactElement {
   return (
-    <Formik initialValues={initialValues} onSubmit={displayResults}>
-      {(props: FormikProps<Values>): React.ReactElement => (
-        <View style={styles.container}>
-          {renderForm(props)}
-          <Button
-            disabled={props.isValid}
-            onPress={props.handleSubmit as (e) => void}
-            title={'Submit'}
-          />
-        </View>
-      )}
-    </Formik>
+    <ScrollView>
+      <Text style={styles.title}>Add a contact</Text>
+      <Formik
+        initialValues={initialValues}
+        onSubmit={displayResults}
+        validationSchema={contactFormSchema}
+      >
+        {(props: FormikProps<Values>): React.ReactElement => (
+          <Fragment>
+            {renderForm(props)}
+            <Button
+              disabled={!props.isValid}
+              onPress={props.handleSubmit as (e) => void}
+              title={'Submit'}
+            />
+          </Fragment>
+        )}
+      </Formik>
+    </ScrollView>
   );
 }
 
