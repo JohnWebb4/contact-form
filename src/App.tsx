@@ -1,42 +1,52 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @typescript
- */
+import React from 'react';
+import { Alert, Button, ScrollView, Text, View } from 'react-native';
+import { Formik, FormikProps } from 'formik';
 
-import React, { Component } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import styles from './styles/styles';
+import FormText from './components/FormText';
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
-});
+interface Values {
+  email: string;
+}
 
-class App extends Component {
-  public render(): React.ReactElement {
-    return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>Welcome to React Native!</Text>
-        <Text style={styles.instructions}>To get started, edit App.js</Text>
-      </View>
-    );
-  }
+function displayResults(values: Values): void {
+  Alert.alert('Results', JSON.stringify(values));
+}
+
+function renderForm(props: FormikProps<Values>): React.ReactElement {
+  return (
+    <ScrollView>
+      <Text style={styles.title}>Add a contact</Text>
+      <FormText
+        title={'Email'}
+        value={props.values.email}
+        onBlur={props.handleBlur('email')}
+        onChangeText={props.handleChange('email')}
+      />
+      <Text style={styles.description}>To get started, edit App.js</Text>
+    </ScrollView>
+  );
+}
+
+const initialValues = {
+  email: '',
+};
+
+function App(): React.ReactElement {
+  return (
+    <Formik initialValues={initialValues} onSubmit={displayResults}>
+      {(props: FormikProps<Values>): React.ReactElement => (
+        <View style={styles.container}>
+          {renderForm(props)}
+          <Button
+            disabled={props.isValid}
+            onPress={props.handleSubmit as (e) => void}
+            title={'Submit'}
+          />
+        </View>
+      )}
+    </Formik>
+  );
 }
 
 export default App;

@@ -8,6 +8,7 @@
     "test": "jest"
   },
   "dependencies": {
+    "formik": "^1.5.4",
     "react": "16.8.3",
     "react-native": "0.59.8"
   },
