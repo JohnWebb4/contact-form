@@ -1,14 +1,17 @@
 import { FieldArray, FieldArrayRenderProps } from 'formik';
 import React, { Fragment } from 'react';
+import { ObjectSchema } from 'yup';
 
-import * as strings from '../locales/strings.json';
 import Button from '../components/Button';
 import FormText from '../components/FormText';
 import Header from '../components/Header';
+import * as strings from '../locales/strings.json';
+import { Contact } from '../types/contact';
 
 interface Props {
   emails: string[];
   maxEmails: number;
+  validationSchema: ObjectSchema<Contact>;
   handleChange: (key: string) => any;
   handleBlur: (key: string) => any;
 }
@@ -20,7 +23,7 @@ function getAddEmail(arrayHelpers: FieldArrayRenderProps) {
 }
 
 function canAddAnotherEmail(emails: string[], maxEmails: number): boolean {
-  return emails.length < maxEmails && !emails.some((email) => !email);
+  return emails.length < maxEmails && !emails.some(email => !email);
 }
 
 function EmailSection({
@@ -28,6 +31,7 @@ function EmailSection({
   handleBlur,
   handleChange,
   maxEmails,
+  validationSchema,
 }: Props): React.ReactElement {
   return (
     <FieldArray
@@ -38,11 +42,11 @@ function EmailSection({
 
           {emails.map((email, index) => (
             <FormText
-              key={email}
+              key={index}
               title={strings.email}
               value={email}
-              onBlur={handleBlur(`email[${index}]`)}
-              onChangeText={handleChange(`email[${index}]`)}
+              onBlur={handleBlur(`emails.${index}`)}
+              onChangeText={handleChange(`emails.${index}`)}
             />
           ))}
 

@@ -7,9 +7,11 @@ import AddContactForm from './form/AddContactForm';
 import { Contact } from './types/contact';
 
 const contactFormSchema = Yup.object().shape({
-  email: Yup.string()
-    .email('Invalid email')
-    .required('Required'),
+  emails: Yup.array().of(
+    Yup.string()
+      .email('Invalid email')
+      .required('Required'),
+  ),
 });
 
 const initialValues: Contact = {
@@ -41,6 +43,7 @@ function App(): React.ReactElement {
             handleSubmit={handleSubmit}
             isValid={isValid}
             values={values}
+            validationSchema={contactFormSchema}
           />
         )}
       </Formik>

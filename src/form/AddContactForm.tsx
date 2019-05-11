@@ -1,13 +1,15 @@
 import React, { Fragment } from 'react';
+import { ObjectSchema } from 'yup';
 
-import * as strings from '../locales/strings.json';
-import { Contact } from '../types/contact';
 import Button from '../components/Button';
 import Header from '../components/Header';
 import EmailSection from './EmailSection';
+import * as strings from '../locales/strings.json';
+import { Contact } from '../types/contact';
 
 export interface Props {
   isValid: boolean;
+  validationSchema: ObjectSchema<Contact>;
   values: Contact;
   handleBlur(e: any): any;
   handleChange(e: any): any;
@@ -21,6 +23,7 @@ function AddContactForm({
   handleChange,
   handleSubmit,
   isValid,
+  validationSchema,
   values,
 }: Props): React.ReactElement {
   return (
@@ -32,6 +35,7 @@ function AddContactForm({
         handleBlur={handleBlur}
         handleChange={handleChange}
         maxEmails={MAX_EMAILS}
+        validationSchema={validationSchema}
       />
 
       <Button
