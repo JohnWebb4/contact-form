@@ -1,17 +1,16 @@
 import { FieldArray, FieldArrayRenderProps } from 'formik';
-import React, { Fragment } from 'react';
-import { ObjectSchema } from 'yup';
+import React, { Fragment, useEffect, useState } from 'react';
+import { reach } from 'yup';
 
 import Button from '../components/Button';
 import FormText from '../components/FormText';
 import Header from '../components/Header';
 import * as strings from '../locales/strings.json';
-import { Contact } from '../types/contact';
+import contactSchema from './contactSchema';
 
 interface Props {
   emails: string[];
   maxEmails: number;
-  validationSchema: ObjectSchema<Contact>;
   handleChange: (key: string) => any;
   handleBlur: (key: string) => any;
 }
@@ -22,24 +21,31 @@ function getAddEmail(arrayHelpers: FieldArrayRenderProps) {
   };
 }
 
-function canAddAnotherEmail(emails: string[], maxEmails: number): boolean {
-  return emails.length < maxEmails && !emails.some(email => !email);
-}
-
 function EmailSection({
   emails,
   handleBlur,
   handleChange,
   maxEmails,
-  validationSchema,
 }: Props): React.ReactElement {
+  const [isValid, setIsValid] = useState(false);
+
+  useEffect(() => {
+    reach(contactSchema, 'emails')
+      .validate(emails)
+      .then(() => {
+        setIsValid(true);
+      })
+      .catch(() => {
+        setIsValid(false);
+      });
+  });
+
   return (
     <FieldArray
       name="emails"
       render={arrayHelpers => (
         <Fragment>
           <Header>{strings.email}</Header>
-
           {emails.map((email, index) => (
             <FormText
               key={index}
@@ -51,7 +57,7 @@ function EmailSection({
           ))}
 
           <Button
-            disabled={!canAddAnotherEmail(emails, maxEmails)}
+            disabled={!isValid && emails.length < maxEmails}
             onPress={getAddEmail(arrayHelpers)}
             title={strings.addEmail}
           />
