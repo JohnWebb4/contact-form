@@ -8,9 +8,9 @@ Explore using Formik and Yup for creating an add contact form in React Native.
 
 ## Progress
 
-- Require a first name or last name for a contact
-- Support adding multiple emails with required validation
-- Support the react-native-datepicker library for picking a birthday
+- [x] Require a first name or last name for a contact
+- [x] Support adding multiple emails with required validation
+- [x] Support the react-native-datepicker library for picking a birthday
 
 ## Tools
 
