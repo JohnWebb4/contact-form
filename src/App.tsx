@@ -3,7 +3,7 @@ import React from 'react';
 import { Alert, ScrollView } from 'react-native';
 import * as Yup from 'yup';
 
-import AddContactForm from './components/AddContactForm';
+import AddContactForm from './form/AddContactForm';
 import { Contact } from './types/contact';
 
 const contactFormSchema = Yup.object().shape({
@@ -28,8 +28,20 @@ function App(): React.ReactElement {
         onSubmit={displayResults}
         validationSchema={contactFormSchema}
       >
-        {(props: FormikProps<Contact>): React.ReactElement => (
-          <AddContactForm props={props} />
+        {({
+          handleBlur,
+          handleChange,
+          handleSubmit,
+          isValid,
+          values,
+        }: FormikProps<Contact>): React.ReactElement => (
+          <AddContactForm
+            handleBlur={handleBlur}
+            handleChange={handleChange}
+            handleSubmit={handleSubmit}
+            isValid={isValid}
+            values={values}
+          />
         )}
       </Formik>
     </ScrollView>
