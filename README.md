@@ -4,6 +4,8 @@
 
 Explore using Formik and Yup for creating an add contact form in React Native.
 
+![Screenshot](./app_screenshot.png)
+
 ## Progress
 
 - Require a first name or last name for a contact
