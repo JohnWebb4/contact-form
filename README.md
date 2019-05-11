@@ -1,8 +1,25 @@
 # Contact Form
 
 ## Goal
-Form for adding contacts
+
+Explore using Formik and Yup for creating an add contact form in React Native.
+
+## Progress
+
+- Require a first name or last name for a contact
+- Support adding multiple emails with required validation
+- Support the react-native-datepicker library for picking a birthday
 
 ## Tools
+
 - React Native
 - Formik
+- Yup
+
+## License
+
+[MIT](./LICENSE)
+
+## Contributing
+
+See [Contributing](./CONTRIBUTING)
