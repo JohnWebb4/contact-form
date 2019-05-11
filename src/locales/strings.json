@@ -1,5 +1,9 @@
 {
   "addContact": "Add a Contact",
   "addEmail": "Add another Email",
-  "email": "Email"
+  "email": "Email",
+  "firstName": "First Name",
+  "general": "General",
+  "lastName": "Last Name",
+  "middleName": "Middle Name"
 }

@@ -3,6 +3,7 @@ import React, { Fragment } from 'react';
 import Button from '../components/Button';
 import Header from '../components/Header';
 import EmailSection from './EmailSection';
+import GeneralSection from './GeneralSection';
 import * as strings from '../locales/strings.json';
 import { Contact } from '../types/contact';
 
@@ -26,6 +27,14 @@ function AddContactForm({
   return (
     <Fragment>
       <Header>{strings.addContact}</Header>
+
+      <GeneralSection
+        firstName={values.firstName}
+        handleBlur={handleBlur}
+        handleChange={handleChange}
+        lastName={values.lastName}
+        middleName={values.middleName}
+      />
 
       <EmailSection
         emails={values.emails}

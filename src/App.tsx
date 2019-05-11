@@ -8,6 +8,9 @@ import { Contact } from './types/contact';
 
 const initialValues: Contact = {
   emails: [],
+  firstName: '',
+  lastName: '',
+  middleName: '',
 };
 
 function displayResults(contact: Contact): void {

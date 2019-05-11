@@ -1,11 +1,22 @@
 import * as Yup from 'yup';
 
-const contactSchema = Yup.object().shape({
+import { ContactLike } from '../types/contact';
+
+const contactFields: ContactLike = {
   emails: Yup.array().of(
     Yup.string()
       .email('Invalid email')
       .required('Required'),
   ),
-});
+  firstName: Yup.string().when(
+    'lastName',
+    (lastName: string, schema: Yup.StringSchema) =>
+      lastName ? schema : schema.required(),
+  ),
+  lastName: Yup.string(),
+  middleName: Yup.string(),
+};
+
+const contactSchema = Yup.object().shape(contactFields);
 
 export default contactSchema;

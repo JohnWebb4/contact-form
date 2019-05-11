@@ -3,7 +3,7 @@ import React, { Fragment, useEffect, useState } from 'react';
 import { reach } from 'yup';
 
 import Button from '../components/Button';
-import FormText from '../components/FormText';
+import InputText from '../components/InputText';
 import Header from '../components/Header';
 import * as strings from '../locales/strings.json';
 import contactSchema from './contactSchema';
@@ -47,7 +47,7 @@ function EmailSection({
         <Fragment>
           <Header>{strings.email}</Header>
           {emails.map((email, index) => (
-            <FormText
+            <InputText
               key={index}
               title={strings.email}
               value={email}

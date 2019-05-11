@@ -10,12 +10,11 @@ import {
 interface Props {
   title: string;
   value: string;
-
-  onBlur(e: NativeSyntheticEvent<TargetedEvent>): void;
-  onChangeText(text: string): void;
+  onBlur?(e: NativeSyntheticEvent<TargetedEvent>): void;
+  onChangeText?(text: string): void;
 }
 
-function FormText({
+function InputText({
   onBlur,
   onChangeText,
   title,
@@ -29,4 +28,4 @@ function FormText({
   );
 }
 
-export default FormText;
+export default InputText;
