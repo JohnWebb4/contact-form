@@ -1,9 +1,11 @@
 {
   "addContact": "Add a Contact",
   "addEmail": "Add another Email",
+  "custom": "Custom",
   "email": "Email",
   "firstName": "First Name",
   "general": "General",
   "lastName": "Last Name",
-  "middleName": "Middle Name"
+  "middleName": "Middle Name",
+  "selectDate": "Select Date"
 }

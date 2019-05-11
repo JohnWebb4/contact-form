@@ -23,7 +23,9 @@ module.exports = {
     tsconfigRootDir: './',
   },
   plugins: ['react', '@typescript-eslint'],
-  rules: {},
+  rules: {
+    '@typescript-eslint/no-explicit-any': 0,
+  },
   settings: {
     react: {
       version: 'detect',

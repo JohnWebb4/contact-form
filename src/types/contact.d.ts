@@ -1,4 +1,5 @@
 export interface Contact {
+  birthday?: Date;
   emails: string[];
   firstName: string;
   lastName: string;

@@ -2,10 +2,11 @@ import React, { Fragment } from 'react';
 
 import Button from '../components/Button';
 import Header from '../components/Header';
-import EmailSection from './EmailSection';
-import GeneralSection from './GeneralSection';
 import * as strings from '../locales/strings.json';
 import { Contact } from '../types/contact';
+import CustomSection from './CustomSection';
+import EmailSection from './EmailSection';
+import GeneralSection from './GeneralSection';
 
 export interface Props {
   isValid: boolean;
@@ -41,6 +42,12 @@ function AddContactForm({
         handleBlur={handleBlur}
         handleChange={handleChange}
         maxEmails={MAX_EMAILS}
+      />
+
+      <CustomSection
+        birthday={values.birthday}
+        handleBlur={handleBlur}
+        handleChange={handleChange}
       />
 
       <Button

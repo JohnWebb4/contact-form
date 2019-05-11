@@ -15,7 +15,7 @@ interface Props {
   handleBlur: (key: string) => any;
 }
 
-function getAddEmail(arrayHelpers: FieldArrayRenderProps) {
+function getAddEmail(arrayHelpers: FieldArrayRenderProps): () => void {
   return (): void => {
     arrayHelpers.push('');
   };
@@ -29,32 +29,40 @@ function EmailSection({
 }: Props): React.ReactElement {
   const [isValid, setIsValid] = useState(false);
 
-  useEffect(() => {
-    reach(contactSchema, 'emails')
-      .validate(emails)
-      .then(() => {
-        setIsValid(true);
-      })
-      .catch(() => {
-        setIsValid(false);
-      });
-  });
+  useEffect(
+    (): void => {
+      reach(contactSchema, 'emails')
+        .validate(emails)
+        .then(
+          (): void => {
+            setIsValid(true);
+          },
+        )
+        .catch(
+          (): void => {
+            setIsValid(false);
+          },
+        );
+    },
+  );
 
   return (
     <FieldArray
       name="emails"
-      render={arrayHelpers => (
+      render={(arrayHelpers): React.ReactElement => (
         <Fragment>
           <Header>{strings.email}</Header>
-          {emails.map((email, index) => (
-            <InputText
-              key={index}
-              title={strings.email}
-              value={email}
-              onBlur={handleBlur(`emails.${index}`)}
-              onChangeText={handleChange(`emails.${index}`)}
-            />
-          ))}
+          {emails.map(
+            (email, index): React.ReactElement => (
+              <InputText
+                key={index}
+                title={strings.email}
+                value={email}
+                onBlur={handleBlur(`emails.${index}`)}
+                onChangeText={handleChange(`emails.${index}`)}
+              />
+            ),
+          )}
 
           <Button
             disabled={!isValid && emails.length < maxEmails}
